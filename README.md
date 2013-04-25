@@ -10,15 +10,19 @@ ___
 Defines the following properties:
 
 
-    startX = 0;
-    startY = 0;
-    shiftX = 0;
-    shiftY = 0;
+    startX      = ..;
+    startY      = ..;
+    shiftX      = ..;
+    shiftY      = ..;
 
-    angle = 0;
-    vector = 0;
+    angle       = ..;
+    vector      = ..;
 
-    touches = 0;
+    startTime   = ..;
+    endTime     = ..;
+    speed       = ..;
+
+    touches     = ..;
 
 With following two methods:
 
