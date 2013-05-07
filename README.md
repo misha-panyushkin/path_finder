@@ -10,19 +10,18 @@ ___
 Defines the following properties:
 
 
-    startX      = ..;
-    startY      = ..;
-    shiftX      = ..;
-    shiftY      = ..;
+    startX:     typeof Number (px),
+    startY:     typeof Number (px),
+    shiftX:   	typeof Number (px),
+    shiftY:   	typeof Number (px),
 
-    angle       = ..;
-    vector      = ..;
+    angle:   	typeof Number (degrees),
+    vector:   	typeof Number (times),
 
-    startTime   = ..;
-    endTime     = ..;
-    speed       = ..;
+    startTime:  typeof Number (millisec),
+    endTime:   	typeof Number (millisec),
+    speed:   	typeof Number (px/sec)
 
-    touches     = ..;
 
 With following two methods:
 

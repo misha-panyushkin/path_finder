@@ -1,8 +1,8 @@
-var PathFinder = function(){
+var PathFinder = function () {
 
     var pi = 3.14159265359;
 
-    var PathFinder = function(){
+    var PathFinder = function () {
         this.startX = 0;
         this.startY = 0;
         this.shiftX = 0;
@@ -14,19 +14,16 @@ var PathFinder = function(){
         this.startTime = 0;
         this.endTime = 0;
         this.speed = 0;
-
-        this.touches = 0;
     };
 
-    PathFinder.prototype.setStartPoint = function(X, Y, touches){
+    PathFinder.prototype.setStartPoint = function (X, Y) {
         this.startX    =  X ? X : 0;
         this.startY    =  Y ? Y : 0;
-        this.touches   = touches;
         this.shiftX    = this.shiftY = 0;
         this.startTime = new Date;
     };
 
-    PathFinder.prototype.setPoint = function(X, Y, touches){
+    PathFinder.prototype.setPoint = function (X, Y) {
         var t = this;
 
         t.shiftX   =  X ? X - t.startX : 0;
@@ -48,8 +45,6 @@ var PathFinder = function(){
         var hypothenuse = Math.sqrt( Math.pow(t.shiftX,2) + Math.pow(t.shiftY,2)),
             time = (t.startTime - t.endTime)/1000;
         t.speed = hypothenuse / time;
-
-        t.touches  = touches;
     };
 
     return PathFinder;
