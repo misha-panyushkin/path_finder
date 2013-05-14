@@ -20,7 +20,11 @@ Defines the following properties:
 
     startTime:  typeof Number (millisec),
     endTime:   	typeof Number (millisec),
-    speed:   	typeof Number (px/sec)
+    speed:   	typeof Number (px/sec),
+
+    preferable_plane:  	typeof String (millisec),
+    preferable_way:   	typeof String (one of
+						"up", "right", "down", "left")
 
 
 With following two methods:
