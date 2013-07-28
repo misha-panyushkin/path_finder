@@ -1,3 +1,12 @@
+/*
+ * The PathFinder class.
+ *
+ * Created by Misha Panyushkin.
+ * misha.panyushkin@gmail.com
+ *
+ * 01.07.2013
+ * */
+
 var PathFinder = function () {
 
     var pi             = 3.14159265359,
@@ -18,6 +27,34 @@ var PathFinder = function () {
 
         this.preferable_plane = 0;
         this.preferable_way = 0;
+    };
+
+    PathFinder.could = PathFinder.prototype = {
+
+        setStartPoint: function (X, Y) {
+            this.startX    =  X ? X : 0;
+            this.startY    =  Y ? Y : 0;
+            this.shiftX    = this.shiftY = 0;
+            this.startTime = new Date;
+            this.preferable_plane = 0;
+        },
+
+        setPoint: function (X, Y) {
+            this.shiftX   =  X ? X - this.startX : 0;
+            this.shiftY   =  Y ? Y - this.startY : 0;
+
+            setAngle (this);
+
+            ! this.preferable_plane && setPreferablePlane (this);
+
+            setPreferableWay (this);
+
+            this.vector = parseInt(12*this.angle/360) || 12;
+
+            this.endTime = new Date;
+
+            setSpeed (this);
+        }
     };
 
     // Private.
@@ -65,34 +102,6 @@ var PathFinder = function () {
             time = (t.startTime - t.endTime)/1000;
         t.speed = hypothenuse / time;
     }
-
-    // Public.
-    PathFinder.prototype.setStartPoint = function (X, Y) {
-        this.startX    =  X ? X : 0;
-        this.startY    =  Y ? Y : 0;
-        this.shiftX    = this.shiftY = 0;
-        this.startTime = new Date;
-        this.preferable_plane = 0;
-    };
-
-    PathFinder.prototype.setPoint = function (X, Y) {
-        var t = this;
-
-        t.shiftX   =  X ? X - t.startX : 0;
-        t.shiftY   =  Y ? Y - t.startY : 0;
-
-        setAngle (t);
-
-        ! t.preferable_plane && setPreferablePlane (t);
-
-        setPreferableWay (t);
-
-        t.vector = parseInt(12*t.angle/360) || 12;
-
-        t.endTime = new Date;
-
-        setSpeed (t);
-    };
 
     return PathFinder;
 }();
