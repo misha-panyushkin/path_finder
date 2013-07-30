@@ -10,24 +10,42 @@ ___
 Defines the following properties:
 
 
-    startX:     typeof Number (px),
-    startY:     typeof Number (px),
-    shiftX:   	typeof Number (px),
-    shiftY:   	typeof Number (px),
+    startX:     	type of Number (px),
+    startY:     	type of Number (px),
+    
+	shiftX:   		type of Number (px),
+    shiftY:   		type of Number (px),
 
-    angle:   	typeof Number (degrees),
-    vector:   	typeof Number (times),
+	touchShiftX:	type of Number (px),
+    touchShiftY:	type of Number (px),
 
-    startTime:  typeof Number (millisec),
-    endTime:   	typeof Number (millisec),
-    speed:   	typeof Number (px/sec),
+	distanceX:  	type of Number (px),
+    distanceY:  	type of Number (px),
+    
+    angle:   		type of Number (degrees),
+    vector:   		type of Number (times),
+
+    startTime:  	type of Number (milli sec),
+    endTime:   		type of Number (milli sec),
+    speed:   		type of Number (px/sec)
+
+    identifier: 	type of Number (touch identifier),
 
     preferable_plane:  	typeof String (millisec),
-    preferable_way:   	typeof String (one of
-						"up", "right", "down", "left")
+    preferable_way:   	typeof String 
+						(one of "up", "right", "down", "left"),
+
+	right:			type of Number (px),
+	bottom:			type of Number (px),
+	left:			type of Number (px),
+	top:			type of Number (px),
+
+	width:			type of Number (px),
+	height:			type of Number (px)
 
 
 With following two methods:
 
-	setStartPoint( X, Y, touches );
-	setPoint( X, Y, touches );
+	setStartPoint	( X, Y, ID );
+	setPoint		( X, Y );
+	setTouchShift   ();
