@@ -1,22 +1,19 @@
-/*
- * The PathFinder class.
- *
- * Created by Misha Panyushkin.
- * misha.panyushkin@gmail.com
- *
- * 01.07.2013
- * */
-
-var PathFinder = function () {
+var PathFinder = function (undefined) {
 
     var pi             = 3.14159265359,
-        touch_limen    = 10;
+        touch_limen    = 50;
 
-    var PathFinder = function () {
+    var PathFinder = function (rect) {
         this.startX = 0;
         this.startY = 0;
         this.shiftX = 0;
         this.shiftY = 0;
+
+        this.touchShiftX = 0;
+        this.touchShiftY = 0;
+
+        this.distanceX = 0;
+        this.distanceY = 0;
 
         this.angle = 0;
         this.vector = 0;
@@ -27,25 +24,39 @@ var PathFinder = function () {
 
         this.preferable_plane = 0;
         this.preferable_way = 0;
+
+        this.identifier = undefined;
+
+        for (var i in rect) if (rect.hasOwnProperty(i)) {
+            this[i] = rect[i];
+        }
     };
 
     PathFinder.could = PathFinder.prototype = {
 
-        setStartPoint: function (X, Y) {
+        setStartPoint: function (X, Y, ID) {
             this.startX    =  X ? X : 0;
             this.startY    =  Y ? Y : 0;
+
             this.shiftX    = this.shiftY = 0;
+
             this.startTime = new Date;
             this.preferable_plane = 0;
+            this.identifier = ID || this.identifier;
+
+            return this;
         },
 
         setPoint: function (X, Y) {
             this.shiftX   =  X ? X - this.startX : 0;
             this.shiftY   =  Y ? Y - this.startY : 0;
 
+            this.distanceX = this.shiftX + this.touchShiftX;
+            this.distanceY = this.shiftY + this.touchShiftY;
+
             setAngle (this);
 
-            ! this.preferable_plane && setPreferablePlane (this);
+            setPreferablePlane (this);
 
             setPreferableWay (this);
 
@@ -54,6 +65,15 @@ var PathFinder = function () {
             this.endTime = new Date;
 
             setSpeed (this);
+
+            return this;
+        },
+
+        setTouchShift: function () {
+            this.touchShiftX   +=  this.shiftX;
+            this.touchShiftY   +=  this.shiftY;
+
+            return this;
         }
     };
 
