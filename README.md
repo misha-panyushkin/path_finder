@@ -31,9 +31,9 @@ Defines the following properties:
 
     identifier: 	type of Number (touch identifier),
 
-    preferable_plane:  	typeof String (millisec),
-    preferable_way:   	typeof String 
-						(one of "up", "right", "down", "left"),
+    plane:  	    typeof String (millisec),
+    way:   	        typeof String
+                    (one of "up", "right", "down", "left"),
 
 	right:			type of Number (px),
 	bottom:			type of Number (px),

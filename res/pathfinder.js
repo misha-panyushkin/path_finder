@@ -1,7 +1,16 @@
+/*
+ * The Path Finder Methods Collection.
+ *
+ * Created by Misha Panyushkin.
+ * misha.panyushkin@gmail.com
+ *
+ * 25.07.2013
+ * */
+
 var PathFinder = function (undefined) {
 
     var pi             = 3.14159265359,
-        touch_limen    = 50;
+        touch_limen    = .5;
 
     var PathFinder = function (rect) {
         this.startX = 0;
@@ -22,8 +31,8 @@ var PathFinder = function (undefined) {
         this.endTime = 0;
         this.speed = 0;
 
-        this.preferable_plane = 0;
-        this.preferable_way = 0;
+        this.plane = undefined;
+        this.way = undefined;
 
         this.identifier = undefined;
 
@@ -41,7 +50,7 @@ var PathFinder = function (undefined) {
             this.shiftX    = this.shiftY = 0;
 
             this.startTime = new Date;
-            this.preferable_plane = 0;
+            this.plane = 0;
             this.identifier = ID || this.identifier;
 
             return this;
@@ -56,7 +65,7 @@ var PathFinder = function (undefined) {
 
             setAngle (this);
 
-            setPreferablePlane (this);
+            !this.plane && setPreferablePlane (this);
 
             setPreferableWay (this);
 
@@ -79,16 +88,16 @@ var PathFinder = function (undefined) {
 
     // Private.
     function setPreferableWay (t) {
-        switch (t.preferable_plane) {
-            case "horizontal":
-                t.preferable_way = t.shiftX > 0 ? "right" : "left";
+        switch (t.plane) {
+            case "aflat":
+                t.way = t.shiftX > 0 ? "right" : "left";
                 break;
-            case "vertical":
+            case "upright":
                 // Browser ordinates axis has opposite direction.
-                t.preferable_way = t.shiftY > 0 ? "down" : "up";
+                t.way = t.shiftY > 0 ? "down" : "up";
                 break;
             default:
-                t.preferable_way = "rollback";
+                t.way = "rollback";
         }
     }
 
@@ -96,13 +105,13 @@ var PathFinder = function (undefined) {
         var x = Math.abs(t.shiftX),
             y = Math.abs(t.shiftY);
         if (x > y) {
-            t.preferable_plane = x > touch_limen
-                ? "horizontal"
-                : "before_touch_limen"
+            t.plane = x > touch_limen
+                ? "aflat"
+                : "atStart"
         } else if (x < y) {
-            t.preferable_plane = y > touch_limen
-                ? "vertical"
-                : "before_touch_limen"
+            t.plane = y > touch_limen
+                ? "upright"
+                : "atStart"
         }
     }
 
@@ -124,4 +133,4 @@ var PathFinder = function (undefined) {
     }
 
     return PathFinder;
-}();
+} () ;
