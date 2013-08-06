@@ -7,7 +7,7 @@
  * 25.07.2013
  * */
 
-var PathFinder = function (undefined) {
+var PathFinder = function (window, undefined) {
 
     var pi             = 3.14159265359,
         touch_limen    = .5;
@@ -37,7 +37,12 @@ var PathFinder = function (undefined) {
         this.identifier = undefined;
 
         for (var i in rect) if (rect.hasOwnProperty(i)) {
-            this[i] = rect[i];
+            if (i === "left")
+                this[i] = rect[i] + window.scrollX;
+            else if (i === "top")
+                this[i] = rect[i] + window.scrollY;
+            else
+                this[i] = rect[i];
         }
     };
 
@@ -133,4 +138,4 @@ var PathFinder = function (undefined) {
     }
 
     return PathFinder;
-} () ;
+} (window) ;
