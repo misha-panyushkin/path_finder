@@ -1,10 +1,10 @@
 /*
- * The Path Finder Methods Collection.
+ * The PathFinder class.
  *
  * Created by Misha Panyushkin.
  * misha.panyushkin@gmail.com
  *
- * 25.07.2013
+ * 01.07.2013
  * */
 
 var PathFinder = function (window, undefined) {
@@ -133,7 +133,7 @@ var PathFinder = function (window, undefined) {
 
     function setSpeed (t) {
         var hypothenuse = Math.sqrt( Math.pow(t.shiftX,2) + Math.pow(t.shiftY,2)),
-            time = (t.startTime - t.endTime)/1000;
+            time = (t.endTime - t.startTime)/1000;
         t.speed = hypothenuse / time;
     }
 
